@@ -5,7 +5,7 @@ WORKDIR /app/source
 RUN ./mvnw clean package
 
 
-FROM builder
+FROM openjdk:26-ea-17-jdk-slim
 COPY --from=builder /app/source/target/*.jar /app/app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]
